@@ -7,30 +7,36 @@ alert(`Result: ${calculate(value_1, value_2, arithmeticSign)}`);
 // Functions for work with calculator
 
 function calculate(n1 = 0, n2 = 0, sign = '+') {
-    if(isNaN(n1) || isNaN(n2)) {
-        alert(`${n1} or ${n2} is not a number!`);
-        return -1;
-    } else if(n1 == null || n2 == null || sign == null) {
-        alert('You have skiped to enter something');
-        return -1;
+    if(checkedEntering(n1, n2, sign)) {
+        switch(sign) {
+            case '+': {
+                return add(n1, n2);
+            }
+            case '-': {
+                return subtraction(n1, n2);
+            }
+            case '/': {
+                return division(n1, n2);
+            }
+            case '*': {
+                return multiply(n1, n2);
+            }
+            default: {
+                return `Such arithmetic sign like "${arithmeticSign}" not supported`;
+            }
+        }
+    } else {
+        return `You have entered not correct data or skiped it: ${n1}, ${n2}, ${sign}`;
     }
-    switch(sign) {
-        case '+': {
-            return add(n1, n2);
-        }
-        case '-': {
-            return subtraction(n1, n2);
-        }
-        case '/': {
-            return division(n1, n2);
-        }
-        case '*': {
-            return multiply(n1, n2);
-        }
-        default: {
-            alert(`Such arithmetic sign like "${arithmeticSign}" not supported`);
-            return -1;
-        }
+}
+
+function checkedEntering(n1, n2, sign) {
+    if(isNaN(n1) || isNaN(n2)) {
+        return false;
+    } else if(n1 == null || n2 == null || sign == null) {
+        return false;
+    } else {
+        return true;
     }
 }
 
