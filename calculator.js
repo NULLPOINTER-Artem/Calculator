@@ -7,6 +7,13 @@ alert(`Result: ${calculate(value_1, value_2, arithmeticSign)}`);
 // Functions for work with calculator
 
 function calculate(n1 = 0, n2 = 0, sign = '+') {
+    if(isNaN(n1) || isNaN(n2)) {
+        alert(`${n1} or ${n2} is not a number!`);
+        return -1;
+    } else if(n1 == null || n2 == null || sign == null) {
+        alert('You have skiped to enter something');
+        return -1;
+    }
     switch(sign) {
         case '+': {
             return add(n1, n2);
@@ -22,10 +29,9 @@ function calculate(n1 = 0, n2 = 0, sign = '+') {
         }
         default: {
             alert(`Such arithmetic sign like "${arithmeticSign}" not supported`);
-            break;
+            return -1;
         }
     }
-    return 0;
 }
 
 function add(n1, n2) {
